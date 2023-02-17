@@ -1,0 +1,81 @@
+import java.util.Scanner;
+
+public class CaesarCipher {
+	
+	
+	public static String Encryption(String text,int position) {
+		String encrypt="",result="";
+		
+		
+		for(int i=0;i<text.length();i++) {
+			if(text.charAt(i)==' ') {
+				continue;
+			}
+			else {
+				if(Character.isLowerCase(text.charAt(i)))
+					encrypt+=Character.toUpperCase(text.charAt(i));
+				
+				else
+					encrypt +=text.charAt(i);
+			}
+			
+		}
+		
+		for(int i=0;i<encrypt.length();i++) {
+			char shiftedLetter=(char) (encrypt.charAt(i)+position);
+			
+			
+			if(shiftedLetter>'Z')
+				shiftedLetter=(char) (shiftedLetter +'A'-'Z'-1);
+			
+			
+			result+=shiftedLetter;
+		}
+		return result;
+	}
+	public static String Decrypt(String text,int position) {
+		String result=" ";
+		
+		for(int i=0;i<text.length();i++) {
+			char shiftedLetter=(char)(text.charAt(i)-position);
+			
+			if(shiftedLetter<'A')
+				shiftedLetter=(char)(shiftedLetter-'A'+'Z'+1);
+			
+			result+=shiftedLetter;
+			
+		}
+		return result;
+	}
+
+	public static void main(String[] args) {
+		
+		System.out.println("The caesar cipher is used in Cyber Security for security purpose.\nIt encrypts the"
+				+ "text while sending and again decrypts when received ");
+		
+		System.out.println("\nthe code for ceasar cipher is : ");
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Please enter message: ");
+		String msg=sc.nextLine();
+		
+		System.out.println("Enter encryption Key: ");
+		int key=sc.nextInt();
+		
+		sc.close();
+		
+		System.out.println("Encryption started....!!!");
+		String encryptedMessage=Encryption(msg,key);
+		
+		System.out.println("The encrypted message is:" +encryptedMessage);
+
+				// Decrypting the encrypted message
+
+				System.out.println("\nDecrypting..."); 
+				String recoveredMessage = Decrypt (encryptedMessage, key); 
+				System.out.println("The decrypted message is: "+ recoveredMessage);
+		
+		// TODO Auto-generated method stub
+
+	}
+
+}
